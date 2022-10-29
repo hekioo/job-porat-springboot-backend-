@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.entity.JobEntity;
+import com.boot.entity.UserEntity;
 import com.boot.exceptions.ApiResponse;
 import com.boot.service.JobService;
 
@@ -94,4 +95,13 @@ public class JobController {
 		return new ResponseEntity<List<JobEntity>>(jobByCategory, HttpStatus.OK);
 		
 	}
+	
+	
+	// get list of jobs applied by users
+	@GetMapping("/user/{userId}")    // end point  http://localhost:8080/course/student/4
+	public ResponseEntity<List<JobEntity>> getJobsEnrolledByUserId(@PathVariable("userId") int userId) 
+	{
+		List<JobEntity> jobApplied = this.jobService.getJobsEnrolledByUserId(userId);		
+		return new ResponseEntity<List<JobEntity>>(jobApplied, HttpStatus.OK);
+	}	
 }

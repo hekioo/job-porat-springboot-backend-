@@ -27,5 +27,8 @@ public interface JobService {
 	// getJobById
 	public JobEntity getJobById(int jobId);
 	
+	// list of all jobs applied by UserID
+	public List<JobEntity> getJobsEnrolledByUserId(int userId);
+	
 
 }

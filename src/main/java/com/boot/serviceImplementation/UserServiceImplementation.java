@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boot.entity.JobEntity;
 import com.boot.entity.UserEntity;
 import com.boot.exceptions.ResourceNotFoundException;
-import com.boot.repository.JobRepository;
 import com.boot.repository.UserRepository;
 import com.boot.service.UserService;
 
@@ -21,8 +19,6 @@ public class UserServiceImplementation implements UserService
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private JobRepository jobRepo;
 	
 	@Override
 	public UserEntity addUser(UserEntity stu) {
@@ -69,14 +65,9 @@ public class UserServiceImplementation implements UserService
 		return null;
 	}
 
-  // added later on after creating the relation
 
-	@Override
-	public List<UserEntity> getJobsEnrolledByUserId(int jobId) {
-		
-		JobEntity jobObj = this.jobRepo. findById(jobId).orElseThrow(( )-> new ResourceNotFoundException("JOb", "JObID", jobId)); 
-		return this.userRepo.getJobsEnrolledByUserId(jobId);
-	}
+
+	
 	
 	
 }

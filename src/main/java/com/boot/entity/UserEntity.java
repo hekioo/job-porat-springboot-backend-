@@ -1,5 +1,8 @@
 package com.boot.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="User_Detail")
@@ -39,10 +45,28 @@ public class UserEntity {
 	@Column(nullable=false)
 	private String userSkills;
 	
+	@OneToMany(mappedBy="user1")     // one user can apply many jobs
+	@JsonIgnore
+	private List<JobEntity> jobList = new ArrayList();
 	
-	@ManyToOne     // Many USer can apply in one Job
-	@JoinColumn(name="jobID")
-	private JobEntity job1;
+
+	
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
+				+ ", userPassword=" + userPassword + ", userMobile=" + userMobile + ", userQualification="
+				+ userQualification + ", userSkills=" + userSkills + "]";
+	}
+
+	public List<JobEntity> getJobList() {
+		return jobList;
+	}
+
+	public void setJobList(List<JobEntity> jobList) {
+		this.jobList = jobList;
+	}
+
+	
 	
 	
 
@@ -106,29 +130,6 @@ public class UserEntity {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public JobEntity getJob1() {
-		return job1;
-	}
-
-	public void setJob1(JobEntity job1) {
-		this.job1 = job1;
-	}
-
-	@Override
-	public String toString() {
-		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userPassword=" + userPassword + ", userMobile=" + userMobile + ", userQualification="
-				+ userQualification + ", userSkills=" + userSkills + ", job1=" + job1 + "]";
-	}
-
-	
-	
-	
-	
-	
-	
-	
 
 
 }

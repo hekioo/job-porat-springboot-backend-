@@ -24,8 +24,7 @@ public interface UserService {
 		// delete User record by ID
 		public void deleteUserById(int UserId);
 
-		// list of jobs applied by UserID
-		public List<UserEntity> getJobsEnrolledByUserId(int jobId);
+		
 		
 		UserEntity addUser(UserEntity stu);
 

@@ -85,12 +85,7 @@ public class UserController
 		
 		
 		
-		@GetMapping("/job/{jobId}")    // end point  http://localhost:8080/course/student/4
-		public ResponseEntity<List<UserEntity>> getJobsEnrolledByUserId(@PathVariable("jobId") int jobId) 
-		{
-			List<UserEntity> jobApplied = this.userService.getJobsEnrolledByUserId(jobId);		
-			return new ResponseEntity<List<UserEntity>>(jobApplied, HttpStatus.OK);
-		}	
+		
 			
 		
 		

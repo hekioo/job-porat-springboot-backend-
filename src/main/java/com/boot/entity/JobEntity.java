@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,19 +40,20 @@ public class JobEntity
 	@Column(nullable=false)
 	private String jobSalary;
 	
+
 	
-	@OneToMany(mappedBy="job1")     // one job can be applied by many users
-	private List<UserEntity> userList = new ArrayList();
-	
-	
+	@ManyToOne     // Many JObs can apply by one student
+	@JoinColumn(name="uid")
+	private UserEntity user1;
 	
 
-	public List<UserEntity> getUserList() {
-		return userList;
+	
+	public UserEntity getUser1() {
+		return user1;
 	}
 
-	public void setUserList(List<UserEntity> userList) {
-		this.userList = userList;
+	public void setUser1(UserEntity user1) {
+		this.user1 = user1;
 	}
 
 	public int getJobId() {
@@ -103,12 +106,7 @@ public class JobEntity
 
 	
 
-	@Override
-	public String toString() {
-		return "JobEntity [jobId=" + jobId + ", companyName=" + companyName + ", jobTitle=" + jobTitle
-				+ ", jobCategory=" + jobCategory + ", jobDescription=" + jobDescription + ", jobLocation=" + jobLocation
-				+ ", jobSalary=" + jobSalary + ", userList=" + userList + "]";
-	}
+	
 
 	public String getCompanyName() {
 		return companyName;
@@ -122,6 +120,15 @@ public class JobEntity
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "JobEntity [jobId=" + jobId + ", companyName=" + companyName + ", jobTitle=" + jobTitle
+				+ ", jobCategory=" + jobCategory + ", jobDescription=" + jobDescription + ", jobLocation=" + jobLocation
+				+ ", jobSalary=" + jobSalary + ", user1=" + user1 + "]";
+	}
+	
+	
 	
 	
 	
