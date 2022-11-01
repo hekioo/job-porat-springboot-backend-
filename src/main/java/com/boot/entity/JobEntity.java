@@ -42,19 +42,19 @@ public class JobEntity
 	
 
 	
-	@ManyToOne     // Many JObs can apply by one student
-	@JoinColumn(name="uid")
-	private UserEntity user1;
+	//@ManyToOne     // Many JObs can apply by one student
+	//@JoinColumn(name="uid")
+	//private UserEntity user1;
 	
 
 	
-	public UserEntity getUser1() {
-		return user1;
-	}
-
-	public void setUser1(UserEntity user1) {
-		this.user1 = user1;
-	}
+//	public UserEntity getUser1() {
+//		return user1;
+//	}
+//
+//	public void setUser1(UserEntity user1) {
+//		this.user1 = user1;
+//	}
 
 	public int getJobId() {
 		return jobId;
@@ -125,7 +125,7 @@ public class JobEntity
 	public String toString() {
 		return "JobEntity [jobId=" + jobId + ", companyName=" + companyName + ", jobTitle=" + jobTitle
 				+ ", jobCategory=" + jobCategory + ", jobDescription=" + jobDescription + ", jobLocation=" + jobLocation
-				+ ", jobSalary=" + jobSalary + ", user1=" + user1 + "]";
+				+ ", jobSalary=" + jobSalary + "]";
 	}
 	
 	

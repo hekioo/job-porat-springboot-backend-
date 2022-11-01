@@ -45,9 +45,9 @@ public class UserEntity {
 	@Column(nullable=false)
 	private String userSkills;
 	
-	@OneToMany(mappedBy="user1")     // one user can apply many jobs
-	@JsonIgnore
-	private List<JobEntity> jobList = new ArrayList();
+	//@OneToMany(mappedBy="user1")     // one user can apply many jobs
+	//@JsonIgnore
+	//private List<JobEntity> jobList = new ArrayList();
 	
 
 	
@@ -58,13 +58,13 @@ public class UserEntity {
 				+ userQualification + ", userSkills=" + userSkills + "]";
 	}
 
-	public List<JobEntity> getJobList() {
-		return jobList;
-	}
-
-	public void setJobList(List<JobEntity> jobList) {
-		this.jobList = jobList;
-	}
+//	public List<JobEntity> getJobList() {
+//		return jobList;
+//	}
+//
+//	public void setJobList(List<JobEntity> jobList) {
+//		this.jobList = jobList;
+//	}
 
 	
 	

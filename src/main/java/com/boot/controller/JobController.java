@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.entity.JobEntity;
-import com.boot.entity.UserEntity;
 import com.boot.exceptions.ApiResponse;
 import com.boot.service.JobService;
 
 @RestController // to deal with the REST API
 @RequestMapping("/job")
+@CrossOrigin("*")  // this is used to make both the ports(Angular:4200 and SpringBoot: 8080 compatible)
+
 public class JobController {
 
 	@Autowired
@@ -98,10 +100,10 @@ public class JobController {
 	
 	
 	// get list of jobs applied by users
-	@GetMapping("/user/{userId}")    // end point  http://localhost:8080/course/student/4
-	public ResponseEntity<List<JobEntity>> getJobsEnrolledByUserId(@PathVariable("userId") int userId) 
-	{
-		List<JobEntity> jobApplied = this.jobService.getJobsEnrolledByUserId(userId);		
-		return new ResponseEntity<List<JobEntity>>(jobApplied, HttpStatus.OK);
-	}	
+//	@GetMapping("/user/{userId}")    // end point  http://localhost:8080/course/student/4
+//	public ResponseEntity<List<JobEntity>> getJobsEnrolledByUserId(@PathVariable("userId") int userId) 
+//	{
+//		List<JobEntity> jobApplied = this.jobService.getJobsEnrolledByUserId(userId);		
+//		return new ResponseEntity<List<JobEntity>>(jobApplied, HttpStatus.OK);
+//	}	
 }

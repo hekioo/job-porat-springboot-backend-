@@ -58,11 +58,12 @@ public class UserServiceImplementation implements UserService
 		
 	}
 
-	
+
+
 	@Override
-	public UserEntity addUser() {
-		
-		return null;
+	public UserEntity checkLogin(String userEmail, String userPassword) {
+		UserEntity user = this.userRepo.findByUserEmailAndUserPassword(userEmail, userPassword);
+		return user;
 	}
 
 

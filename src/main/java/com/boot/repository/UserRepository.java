@@ -7,7 +7,7 @@ import com.boot.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Integer>
 {
 	
-	
+	UserEntity findByUserEmailAndUserPassword(String userEmail, String userPassword);
 	
 	
 }
