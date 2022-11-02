@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.entity.AppliedJobEntity;
+import com.boot.entity.JobEntity;
 import com.boot.service.AppliedJobService;
 import com.boot.service.JobService;
 
@@ -25,6 +26,8 @@ public class AppliedJobController {
 	@Autowired
 	private AppliedJobService appliedJobService;
 	private AppliedJobEntity appliedJobEntity;
+	@Autowired
+	private JobService jobService;
 	
 	
 	
@@ -57,6 +60,8 @@ public class AppliedJobController {
 		AppliedJobEntity appliedJobsById = this.appliedJobService.getAppliedJobById(jobId);
     	return new ResponseEntity<AppliedJobEntity>(appliedJobsById,HttpStatus.OK);
 	}
+	
+	
 	
 	
 
