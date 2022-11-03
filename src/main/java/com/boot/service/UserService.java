@@ -10,7 +10,7 @@ public interface UserService {
 	// below all these are the abstract method as this is the interface created!
 
 		// to add a new record of User
-		public UserEntity addUser();
+		public UserEntity addUser(UserEntity user);
 
 		// to get all the User list
 		public List<UserEntity> getAllUser();
@@ -24,8 +24,8 @@ public interface UserService {
 		// delete User record by ID
 		public void deleteUserById(int UserId);
 
-		
-		
-		UserEntity addUser(UserEntity stu);
+		//login User acc to credentials
+				public UserEntity checkLogin(String userEmail, String userPassword);
+	
 
 }

@@ -3,6 +3,7 @@ package com.boot.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class UserEntity {
 	@Column(nullable=false)
 	private String userSkills;
 	
-	@OneToMany(mappedBy="user1")     // one user can apply many jobs
+	@OneToMany(mappedBy="user1")     // one user can apply many jobs    cascade = CascadeType.AUTO
 	@JsonIgnore
 	private List<JobEntity> jobList = new ArrayList();
 	

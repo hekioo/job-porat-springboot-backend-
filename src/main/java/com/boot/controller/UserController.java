@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.entity.UserEntity;
@@ -22,6 +24,7 @@ import com.boot.service.UserService;
 
 @RestController      // to deal with the REST API
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController 
 {
 	
@@ -82,6 +85,27 @@ public class UserController
 			response.setMesaage("Your record is deleted Successfully! with User ID: " + userId);
 			return new ResponseEntity<ApiResponse> (response, HttpStatus.OK);
 		}
+		
+		
+		
+		
+		
+		//login detail check
+				@GetMapping("/login")
+				public ResponseEntity<UserEntity> checkLogin(@RequestParam("email") String email, @RequestParam("password") String password)
+				{
+
+					UserEntity check = this.userService.checkLogin(email, password);
+					if(check!=null)
+					{
+						return new ResponseEntity<UserEntity>(check, HttpStatus.OK);
+					}
+					else
+					{
+						return null;
+					}
+
+				}
 		
 		
 		
