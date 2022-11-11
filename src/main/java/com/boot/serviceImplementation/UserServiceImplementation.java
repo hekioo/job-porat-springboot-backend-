@@ -12,7 +12,6 @@ import com.boot.service.UserService;
 
 
 @Service     // It is used to mark the class as a service provider.
-				// this class provide some functionality
 public class UserServiceImplementation implements UserService
 {
 	

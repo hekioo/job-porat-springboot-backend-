@@ -2,7 +2,6 @@ package com.boot.service;
 
 import java.util.List;
 
-import com.boot.entity.AppliedJobEntity;
 import com.boot.entity.JobEntity;
 
 public interface JobService {
@@ -27,10 +26,14 @@ public interface JobService {
 	
 	// getJobById
 	public JobEntity getJobById(int jobId);
+	
+	
+	
+//	AppliedJobEntity getAppliedJobById(int userId);
 
 	
 	// list of all jobs applied by UserID
-	//public List<JobEntity> getJobsEnrolledByUserId(int userId);
+	public List<JobEntity> getJobsEnrolledByUserId(int userId);
 	
 
 }

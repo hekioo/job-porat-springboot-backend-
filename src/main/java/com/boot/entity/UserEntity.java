@@ -3,21 +3,22 @@ package com.boot.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="User_Detail")
-
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","FieldHandler"})
 public class UserEntity {
 
 	
@@ -45,30 +46,11 @@ public class UserEntity {
 	@Column(nullable=false)
 	private String userSkills;
 	
-	//@OneToMany(mappedBy="user1")     // one user can apply many jobs
-	//@JsonIgnore
-	//private List<JobEntity> jobList = new ArrayList();
+	//OneToMany
 	
-
-	
-	@Override
-	public String toString() {
-		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userPassword=" + userPassword + ", userMobile=" + userMobile + ", userQualification="
-				+ userQualification + ", userSkills=" + userSkills + "]";
-	}
-
-//	public List<JobEntity> getJobList() {
-//		return jobList;
-//	}
-//
-//	public void setJobList(List<JobEntity> jobList) {
-//		this.jobList = jobList;
-//	}
-
-	
-	
-	
+	 @OneToMany(mappedBy = "users1",cascade = CascadeType.ALL)
+	    @JsonIgnore
+	    private List<AppliedJobEntity> aplliedList=new ArrayList();
 
 	public int getUserId() {
 		return userId;
@@ -126,10 +108,58 @@ public class UserEntity {
 		this.userSkills = userSkills;
 	}
 
+	public List<AppliedJobEntity> getAplliedList() {
+		return aplliedList;
+	}
+
+	public void setAplliedList(List<AppliedJobEntity> aplliedList) {
+		this.aplliedList = aplliedList;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
+				+ ", userPassword=" + userPassword + ", userMobile=" + userMobile + ", userQualification="
+				+ userQualification + ", userSkills=" + userSkills + ", aplliedList=" + aplliedList + "]";
+	}
+
 	public UserEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+	
+
+	
+	 
+	 
+	
+	//@OneToMany(mappedBy="user1")     // one user can apply many jobs
+	//@JsonIgnore
+	//private List<JobEntity> jobList = new ArrayList();
+	
+//	@OneToMany(mappedBy="user1")     // one user can apply many jobs
+//	@JsonIgnore
+//	private List<JobEntity> jobList = new ArrayList();
+
+	
+	
+
+	
+	
+
+//	public List<JobEntity> getJobList() {
+//		return jobList;
+//	}
+//
+//	public void setJobList(List<JobEntity> jobList) {
+//		this.jobList = jobList;
+//	}
+
+	
+	
+
 
 
 }

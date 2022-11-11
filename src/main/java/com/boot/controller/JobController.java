@@ -98,12 +98,13 @@ public class JobController {
 		
 	}
 	
+
 	
 	// get list of jobs applied by users
-//	@GetMapping("/user/{userId}")    // end point  http://localhost:8080/course/student/4
-//	public ResponseEntity<List<JobEntity>> getJobsEnrolledByUserId(@PathVariable("userId") int userId) 
-//	{
-//		List<JobEntity> jobApplied = this.jobService.getJobsEnrolledByUserId(userId);		
-//		return new ResponseEntity<List<JobEntity>>(jobApplied, HttpStatus.OK);
-//	}	
+	@GetMapping("/user/{userId}")    // end point  http://localhost:8080/course/student/4
+	public ResponseEntity<List<JobEntity>> getJobsEnrolledByUserId(@PathVariable("userId") int userId) 
+	{
+		List<JobEntity> jobApplied = this.jobService.getJobsEnrolledByUserId(userId);		
+		return new ResponseEntity<List<JobEntity>>(jobApplied, HttpStatus.OK);
+	}	
 }

@@ -15,8 +15,7 @@ public interface JobRepository extends JpaRepository<JobEntity, Integer>
 	
 	List<JobEntity> findByJobCategory(String category);
 	
-	//List<UserRepository> findByJob1(JobEntity job);
-	
+	//native query
 		@Query(value="select * from job_detail jd where jd.uid=:userId", nativeQuery=true)
 		List<JobEntity> getJobsEnrolledByUserId(@Param("userId") int userId);
 

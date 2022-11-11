@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boot.entity.JobEntity;
+import com.boot.entity.UserEntity;
 import com.boot.exceptions.ResourceNotFoundException;
 import com.boot.repository.JobRepository;
+import com.boot.repository.UserRepository;
 import com.boot.service.JobService;
 
 @Service
@@ -17,10 +19,10 @@ public class JobServiceImplementation implements JobService{
 	
 	@Autowired
 	private JobRepository jobRepo;
-	
 
-	//@Autowired
-	//private UserRepository userRepo;
+
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override	
 	public JobEntity addJob(JobEntity jobb) {
@@ -74,14 +76,27 @@ public class JobServiceImplementation implements JobService{
 
 	}
 	
-//	@Override
-//	public List<JobEntity> getJobsEnrolledByUserId(int userId) {
-//		
-//		UserEntity userObj = this.userRepo. findById(userId).orElseThrow(( )-> new ResourceNotFoundException("JOb", "JObID", userId)); 
-//		return this.jobRepo.getJobsEnrolledByUserId(userId);
-//	}
-
-	
+	@Override
+	public List<JobEntity> getJobsEnrolledByUserId(int userId) {
+		
+		UserEntity userObj = this.userRepo. findById(userId).orElseThrow(( )-> new ResourceNotFoundException("JOb", "JObID", userId)); 
+		return this.jobRepo.getJobsEnrolledByUserId(userId);
+	}
 
 
 }
+
+
+
+
+
+
+//
+//@Override
+//public AppliedJobEntity getAppliedJobById(int userId) {
+//	// TODO Auto-generated method stub
+//	return this.appliedJobRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "UserId", userId));
+//}
+
+
+

@@ -3,18 +3,23 @@ package com.boot.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Job_Detail")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","FieldHandler"})
+
 public class JobEntity 
 {
 	@Id   // it declare particular column as primary key of the table
@@ -40,21 +45,9 @@ public class JobEntity
 	@Column(nullable=false)
 	private String jobSalary;
 	
-
-	
-	//@ManyToOne     // Many JObs can apply by one student
-	//@JoinColumn(name="uid")
-	//private UserEntity user1;
-	
-
-	
-//	public UserEntity getUser1() {
-//		return user1;
-//	}
-//
-//	public void setUser1(UserEntity user1) {
-//		this.user1 = user1;
-//	}
+	@OneToMany(mappedBy = "jobs1",cascade = CascadeType.ALL)
+    @JsonIgnore   
+    private List<AppliedJobEntity> jobAppliedList= new ArrayList();
 
 	public int getJobId() {
 		return jobId;
@@ -62,6 +55,14 @@ public class JobEntity
 
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getJobTitle() {
@@ -104,16 +105,19 @@ public class JobEntity
 		this.jobSalary = jobSalary;
 	}
 
-	
-
-	
-
-	public String getCompanyName() {
-		return companyName;
+	public List<AppliedJobEntity> getJobAppliedList() {
+		return jobAppliedList;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setJobAppliedList(List<AppliedJobEntity> jobAppliedList) {
+		this.jobAppliedList = jobAppliedList;
+	}
+
+	@Override
+	public String toString() {
+		return "JobEntity [jobId=" + jobId + ", companyName=" + companyName + ", jobTitle=" + jobTitle
+				+ ", jobCategory=" + jobCategory + ", jobDescription=" + jobDescription + ", jobLocation=" + jobLocation
+				+ ", jobSalary=" + jobSalary + ", jobAppliedList=" + jobAppliedList + "]";
 	}
 
 	public JobEntity() {
@@ -121,14 +125,35 @@ public class JobEntity
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "JobEntity [jobId=" + jobId + ", companyName=" + companyName + ", jobTitle=" + jobTitle
-				+ ", jobCategory=" + jobCategory + ", jobDescription=" + jobDescription + ", jobLocation=" + jobLocation
-				+ ", jobSalary=" + jobSalary + "]";
-	}
 	
 	
+	
+	
+	
+
+	
+	//@ManyToOne     // Many JObs can apply by one student
+	//@JoinColumn(name="uid")
+	//private UserEntity user1;
+	
+//	@ManyToOne
+//	@JoinColumn(name="uid")
+//	private UserEntity user1;
+
+
+
+	
+	
+
+	
+//	public UserEntity getUser1() {
+//		return user1;
+//	}
+//
+//	public void setUser1(UserEntity user1) {
+//		this.user1 = user1;
+//	}
+
 	
 	
 	

@@ -9,42 +9,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="AppliedJob")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","FieldHandler"})
 public class AppliedJobEntity 
 {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column()
+	@Column
 	private int ApplyJobid;
 	
-	@ManyToOne
-	@JoinColumn(name="userId")
-	 private UserEntity users;
-
-	@ManyToOne
-	@JoinColumn(name="jobId")
-	 private JobEntity jobs;
-
+	@Column
+	private String jobTitle;
 	
+	@ManyToOne
+	@JoinColumn(name="uid")
+	@JsonIgnore
+	 private UserEntity users1;
 
-	
+	@ManyToOne
+	@JoinColumn(name="jid")
+	@JsonIgnore
+	 private JobEntity jobs1;
 
-	public UserEntity getUsers() {
-		return users;
-	}
-
-	public void setUsers(UserEntity users) {
-		this.users = users;
-	}
-
-	public JobEntity getJobs() {
-		return jobs;
-	}
-
-	public void setJobs(JobEntity jobs) {
-		this.jobs = jobs;
+	@Override
+	public String toString() {
+		return "AppliedJobEntity [ApplyJobid=" + ApplyJobid + ", jobTitle=" + jobTitle + ", users=" + users1 + ", jobs="
+				+ jobs1 + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	public AppliedJobEntity() {
@@ -60,10 +56,31 @@ public class AppliedJobEntity
 		ApplyJobid = applyJobid;
 	}
 
-	@Override
-	public String toString() {
-		return "AppliedJobEntity [ApplyJobid=" + ApplyJobid + ", users=" + users + ", jobs=" + jobs + "]";
+	public String getJobTitle() {
+		return jobTitle;
 	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public UserEntity getUsers() {
+		return users1;
+	}
+
+	public void setUsers(UserEntity users) {
+		this.users1 = users;
+	}
+
+	public JobEntity getJobs() {
+		return jobs1;
+	}
+
+	public void setJobs(JobEntity jobs) {
+		this.jobs1 = jobs;
+	}
+
+	
 
 	
 	
