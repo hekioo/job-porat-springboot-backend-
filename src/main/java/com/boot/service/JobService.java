@@ -7,7 +7,7 @@ import com.boot.entity.JobEntity;
 public interface JobService {
 	
 	// to add a new JOb
-	public JobEntity addJob(JobEntity job);
+	JobEntity addJob(JobEntity job);
 	
 	//to delete the job with ID
 	public void deleteJobById(int jobId);

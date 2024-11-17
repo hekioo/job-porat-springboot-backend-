@@ -1,14 +1,19 @@
 package com.boot.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.boot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,16 +32,12 @@ public class UserController
 	
 	@Autowired
 	private UserService userService;
-	
-	@PostMapping("/add_user")    // end point  http://localhost:8080/user/add_user  
-	public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user)
-	{
-		UserEntity savedUser = this.userService.addUser(user);
-		return new ResponseEntity<UserEntity>(savedUser, HttpStatus.CREATED);
-		
-		// we have used ResponseEntity because to change the HTTP status to 201(CREATED) (request send and new resource created)
-		// earlier which was at default at 200(OK) Status i.e request created
-	}
+
+	@Autowired
+	private UserRepository userRepo;
+
+
+
 	
 	
 	// get all the User records
@@ -61,12 +62,30 @@ public class UserController
 		
 		
 		
-		// update USer using User Id
-		@PutMapping("update_user/{userId}")
-		public ResponseEntity<UserEntity> updateUserById(@RequestBody UserEntity user, @PathVariable("userId") int userId)
+		// update User using User name
+	// you can go with this approach also fetching the username from already
+		// authenticated user and then updating his/her details
+		@PutMapping("update_user")
+		public ResponseEntity<UserEntity> updateUserById(@RequestBody UserEntity user)
 		{
-			UserEntity userById = this.userService.updateUserById(user, userId);
-			return new ResponseEntity<UserEntity>(userById, HttpStatus.OK);
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String username = authentication.getName();
+
+			Optional<UserEntity> userInDB = userRepo.findByUserName(username);
+			if(userInDB.isPresent()) {
+				UserEntity updatedUser = userInDB.get();
+
+				//updatedUser.setUserPassword(user.getUserPassword());
+				updatedUser.setUserName(user.getUserName());
+				updatedUser.setUserEmail(user.getUserEmail());
+				updatedUser.setUserMobile(user.getUserMobile());
+				updatedUser.setUserQualification(user.getUserQualification());
+				updatedUser.setUserSkills(user.getUserSkills());
+
+				userRepo.save(updatedUser);
+			}
+
+			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		
 		
