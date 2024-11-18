@@ -1,0 +1,34 @@
+//How to proceed with testing the Authentication and Authorization of JWT implementation
+
+1. Add a new user using /signup api with UserEntity payload
+     --it will create a Bcrypt encoded password that stores in DB, you need not to do anything...
+
+2. to generate a JWT token -->
+
+    -- hit the /login api with the appropriate payload i.e., UserEntity with same username and password that you used while /signup API
+    -- Note: Add username & password in normal format only
+
+    -- select Basic Authentication from Authorization tab dropdown in postman and enter the username & password in normal form
+
+3. to access the other API that are Authenticated like /job/**
+
+    -- Make a proper payload of that API
+    -- select Bearer Token from Authorization tab dropdown in postman and enter token generated which you got when you hit /login API.
+
+
+4. For Security purpose I have removed the SECRET_KEY from code file to here
+
+when starting with Testing The code flow, set this key set as environment variable in IntelliJ or your local machine env variable
+
+
+   ```bash
+   export SECRET_JWT_KEY=u8Jd9sK3lP5q8X2rT6v9yB1nC4e7gH0jM2p5sV8xZ1a4dF7kQ3w6tY9zL2o5rU8
+
+
+    $$   YOU ARE GOOD TO GO   $$
+
+
+
+### Additional Tips:
+- **Environment Variables**: Ensure that the environment variable `SECRET_JWT_KEY` is set correctly in all environments where your application runs (development, staging, production).
+- **Postman Configuration**: Double-check that Postman is configured correctly to use Basic Authentication for the login request and Bearer Token for subsequent requests.
