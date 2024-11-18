@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class JwtUtils {
 
-    private String SECRET_KEY = "Prateek%$@2^@%@$##@!!!Fw$@$";
+    private String SECRET_KEY = "u8Jd9sK3lP5q8X2rT6v9yB1nC4e7gH0jM2p5sV8xZ1a4dF7kQ3w6tY9zL2o5rU8";
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
@@ -36,6 +36,32 @@ public class JwtUtils {
                 .signWith(getSigningKey())
                 .compact();
 
+    }
+
+    public Date extractExpiration(String token) {
+        return extractAllClaims(token).getExpiration();
+    }
+
+
+    private Boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+
+    public String extractUsername(String token) {
+        return extractAllClaims(token).getSubject();
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public Boolean validateToken(String token) {
+        return !isTokenExpired(token);
     }
 
 }
